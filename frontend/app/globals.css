@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 15, 23, 42; /* slate-900 */
+  --background-start-rgb: 248, 250, 252; /* slate-50 */
+}
+
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 5, 11, 20;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+}
+
+/* SweetAlert2 Dynamic Styling */
+div:where(.swal2-container) div:where(.swal2-popup) {
+  @apply bg-white dark:bg-[#131A29] text-gray-900 dark:text-white border border-gray-200 dark:border-white/10;
+}
+div:where(.swal2-container) h2:where(.swal2-title), 
+div:where(.swal2-container) div:where(.swal2-html-container) {
+  @apply text-gray-900 dark:text-gray-300;
+}
+
+@media print {
+  @page {
+    margin: 0;
+  }
+}
