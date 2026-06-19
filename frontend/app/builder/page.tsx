@@ -1051,7 +1051,7 @@ export default function BuilderPage() {
                           onClick={() => {
                             if (analysisResult.rekomendasi?.pendidikan) setValue('education', analysisResult.rekomendasi.pendidikan);
                             if (analysisResult.rekomendasi?.pengalaman) setValue('experience', analysisResult.rekomendasi.pengalaman);
-                            if (analysisResult.rekomendasi?.skills) setValue('skills', analysisResult.rekomendasi.skills);
+                            if (analysisResult.rekomendasi?.skills) setValue('hardSkills', analysisResult.rekomendasi.skills);
                             if (analysisResult.rekomendasi?.posisi) setValue('targetPosition', analysisResult.rekomendasi.posisi);
                             setShowAnalysisModal(false);
                             Swal.fire({ title: language === 'id' ? 'Ajaib!' : 'Amazing!', text: language === 'id' ? 'Seluruh data edukasi, pengalaman, dan skill telah dirombak oleh AI!' : 'All education, experience, and skill data has been revamped by AI!', icon: 'success' });
