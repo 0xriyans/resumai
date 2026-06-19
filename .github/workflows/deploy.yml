@@ -36,6 +36,10 @@ jobs:
             echo "Updating Frontend..."
             cd ../frontend
             npm install
+            
+            echo "Menyiapkan file .env frontend..."
+            echo "NEXT_PUBLIC_API_URL=http://157.230.249.51/api-resumai/api/cv" > .env
+            
             npm run build
             
             # Restart frontend & backend di PM2

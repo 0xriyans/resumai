@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://157.230.249.51/api-resumai/api/cv';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/cv';
 
 export const api = {
   analyze: async (cvData: any) => {
