@@ -1,0 +1,44 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploying Application
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Asumsi project ini ditaruh di /var/www/resumai di server
+            cd /var/www/resumai
+            
+            # Tarik kode terbaru dari GitHub
+            git pull origin main
+            
+            # Update dependencies Backend
+            echo "Updating Backend..."
+            cd backend
+            npm install
+            
+            # Buat file .env secara otomatis
+            echo "Menyiapkan file .env..."
+            echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
+            echo "PORT=5000" >> .env
+            
+            # Update dependencies & Build Frontend (Next.js)
+            echo "Updating Frontend..."
+            cd ../frontend
+            npm install
+            npm run build
+            
+            # Restart frontend & backend di PM2
+            echo "Restarting PM2 services..."
+            pm2 restart all
+            pm2 save
